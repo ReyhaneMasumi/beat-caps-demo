@@ -2,9 +2,9 @@ name: iOS starter workflow
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   build:
@@ -15,6 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set Default Scheme
+        working-directory: /ios
         run: |
           scheme_list=$(xcodebuild -list -json | tr -d "\n")
           default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
